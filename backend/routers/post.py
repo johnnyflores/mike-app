@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 from routers.schemas import PostBase, PostDisplay
 from db.database import get_db
 from db import db_post
+from typing import List
 
 router = APIRouter(
     prefix="/post",
@@ -20,3 +21,7 @@ def create(request: PostBase, db: Session = Depends(get_db)):
             detail=f"Invalid image_url_type. Must be one of {image_url_types}."
         )
     return db_post.create(db, request)
+
+@router.get('/all', response_model=List[PostDisplay])
+def posts(db: Session = Depends(get_db)):
+    return db_post.get_all(db)
