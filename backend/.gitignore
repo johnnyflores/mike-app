@@ -14,4 +14,6 @@ __pycache__/
 venv/
 env/
 
-
+images/*.jpg
+images/*.jpeg
+images/*.png
